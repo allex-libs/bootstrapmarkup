@@ -1,0 +1,25 @@
+{
+  "name": "allex_bootstrapmarkuplib",
+  "version": "1.0.0",
+  "description": "AllexJS lib with helpers for bootstrap related markup",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allex-libs/bootstrapmarkup.git"
+  },
+  "keywords": [
+    "ecosystem:AllexJS",
+    "bootstrap",
+    "markup",
+    "lib"
+  ],
+  "author": "Andrija Petrovic <andrija.hers@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/allex-libs/bootstrapmarkup/issues"
+  },
+  "homepage": "https://github.com/allex-libs/bootstrapmarkup#readme"
+}

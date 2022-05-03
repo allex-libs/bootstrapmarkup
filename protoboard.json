@@ -1,0 +1,21 @@
+{
+  "browserify": {
+    "dist/browserified.js": "./browserify.js"
+  },
+  "js": {},
+  "css": {},
+  "dependencies": {
+    "js": [
+      "allex:templateslite:lib",
+      "allex:htmltemplates:lib"
+    ]
+  },
+	"additionaltargets": {
+    "css": [
+    ]
+  },
+  "protoboard": {
+    "role": "webcomponent",
+    "js_doc_filters": "^(src)"
+  }
+}
