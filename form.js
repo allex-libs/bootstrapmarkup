@@ -8,6 +8,28 @@ function createFormMarkups (lib, o, m, mylib) {
   }
   mylib.rowBreakMarkup = rowBreakMarkup;
 
+  mylib.inputWithFloatingLabel = function (options) {
+    var id = 'ID'+lib.uid();
+    options = options || {};
+    options.input = options.input || {};
+    options.label = options.label || {};
+    return  o(m.div,
+      'CLASS', appendStringTo('form-floating', options.class, ' '),
+      'ATTRS', options.attrs || '',
+      'CONTENTS', [
+        o(m[options.input.type]
+          , 'CLASS', appendStringTo('form-control', options.input.class, ' ')
+          , 'ATTRS', appendStringTo('id="'+id+'" placeholder="'+options.caption+'"', options.input.attrs, ' ')
+        ),
+        o(m.label
+          , 'CLASS', appendStringTo('floatinglabel', options.label.class, ' ')
+          , 'ATTRS', appendStringTo('for="'+id+'"', options.label.attrs, ' ')
+          , 'CONTENTS', options.caption
+        )
+      ]
+    );
+  };
+
   function inputGroupText (options) {
     options = options || {};
     return o(m.span,
@@ -17,6 +39,7 @@ function createFormMarkups (lib, o, m, mylib) {
     );
   }
   mylib.inputGroupText = inputGroupText;
+
 
   mylib.inputGroup2 = function inputGroup2 (options) {
     options = options || {};
@@ -88,7 +111,7 @@ function createFormMarkups (lib, o, m, mylib) {
   }
 
   mylib.collapseButton = function collapseButton (obj) {
-    var id = "ID"+lib.uid(), buttonmarkup, panemarkup;
+    var id = 'ID'+lib.uid(), buttonmarkup, panemarkup;
     obj = obj || {};
     obj.collapse = obj.collapse || {};
     buttonmarkup = o(m.button,
@@ -199,6 +222,24 @@ function createFormMarkups (lib, o, m, mylib) {
     return o(m.div,
       'CLASS', appendStringTo('form-check form-switch', obj.class, ' '),
       'CONTENTS', (obj.contents || []).map(switchGroupElementer)
+    );
+  }
+
+  mylib.groupBox = function (options) {
+    options = options || {};
+    return o(m.div
+      , 'CLASS', lib.joinStringsWith('groupbox d-flex flex-column', options.class, ' ')
+      , 'ATTRS', options.attrs || ''
+      , 'CONTENTS', [
+        o(m.span
+          , 'CLASS', 'groupboxcaption'
+          , 'CONTENTS', options.caption
+        ),
+        o(m.div
+          , 'CLASS', 'groupboxcontents'
+          , 'CONTENTS', options.contents
+        )
+      ]
     );
   }
 
