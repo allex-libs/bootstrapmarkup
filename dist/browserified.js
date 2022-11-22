@@ -241,7 +241,7 @@ function createFormMarkups (lib, o, m, mylib) {
           , 'CONTENTS', options.caption
         ),
         o(m.div
-          , 'CLASS', 'groupboxcontents'
+          , 'CLASS', 'groupboxcontents w-100 h-100'
           , 'CONTENTS', options.contents
         )
       ]
