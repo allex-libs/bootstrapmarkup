@@ -92,16 +92,16 @@ function createFormMarkups (lib, o, m, mylib) {
   }
   mylib.ulGroup = ulGroup;
 
-  mylib.dropDownButton = function dropDownButton (obj) {
+  mylib.dropDown = function dropDown (obj) {
     var id = lib.uid();
     return o(m.div,
       'CLASS', appendStringTo('dropdown', obj.inputgroupclass, ' '),
       'ATTRS', obj.inputgroupattrs || '',
       'CONTENTS', [
-        o(m.button,
-          'CLASS', appendStringTo('btn btn-primary dropdown-toggle', obj.buttonclass, ' '),
+        o(m[obj.buttontype],
+          'CLASS', appendStringTo('dropdown-toggle', obj.buttonclass, ' '),
           'ATTRS', appendStringTo(
-            'id="'+id+'" type="button" data-bs-toggle="dropdown" aria-expanded="false"',
+            'id="'+id+'" data-bs-toggle="dropdown" aria-expanded="false"',
             obj.buttonattrs,
             ' '),
           'CONTENTS', obj.buttontext
@@ -113,7 +113,16 @@ function createFormMarkups (lib, o, m, mylib) {
         })
       ]
     );
-  }
+  };
+
+  mylib.dropDownButton = function dropDownButton (obj) {
+    obj.buttontype = 'button';
+    obj.buttonclass = appendStringTo(obj.buttonclass, 'btn btn-primary', ' ');
+    obj.buttonattrs = appendStringTo(obj.buttonattrs, 'type="button"', ' ');
+    return mylib.dropDown(
+      obj
+    );
+  };
 
   mylib.collapseButton = function collapseButton (obj) {
     var id = 'ID'+lib.uid(), buttonmarkup, panemarkup;
