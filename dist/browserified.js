@@ -52,7 +52,7 @@ function createFormMarkups (lib, o, m, mylib) {
       'CLASS', appendStringTo('input-group', options.class, ' '),
       'ATTRS', options.attrs || '',
       'CONTENTS', [
-        inputGroupText({caption: options.caption, class: 'inputgroup2-caption'}),
+        inputGroupText({caption: options.caption, class: appendStringTo('inputgroup2-caption', options.captionclass, ' '), attrs: options.captionattrs||''}),
         options.fieldmarkup
       ]
     );
