@@ -251,7 +251,31 @@ function createFormMarkups (lib, o, m, mylib) {
         )
       ]
     );
-  }
+  };
+
+  mylib.produceCheckbox = function(options) {
+    var elementtypename, elementname, caption, captionelementname;
+    options = options || {};
+    elementtypename = options.elementtypename || '';
+    elementname = options.elementname || '';
+    caption = options.caption || '';
+    captionelementname = options.captionelementname || '';
+    return o(m.div,
+      'CLASS', lib.joinStringsWith('form-check', options.class, ' '),
+      'ATTRS', options.attrs || '',
+      'CONTENTS', [
+        o(m.checkboxinput,
+          'CLASS', 'form-check-input',
+          'ATTRS', elementtypename+'="'+elementname+'"'
+        ),
+        o(m.label,
+          'CLASS', 'form-check-label',
+          'ATTRS', captionelementname ? elementtypename+'="'+captionelementname+'"' : '',
+          'CONTENTS', caption,
+        )
+      ]
+    )
+  };
 
 }
 module.exports = createFormMarkups;
