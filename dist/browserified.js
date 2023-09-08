@@ -274,8 +274,8 @@ function createFormMarkups (lib, o, m, mylib) {
           'ATTRS', elementtypename+'="'+elementname+'"'
         ),
         o(m.label,
-          'CLASS', 'form-check-label',
-          'ATTRS', captionelementname ? elementtypename+'="'+captionelementname+'"' : '',
+          'CLASS', lib.joinStringsWith('form-check-label', options.captionclass, ' '),
+          'ATTRS', lib.joinStringsWith(captionelementname ? elementtypename+'="'+captionelementname+'"' : '', options.captionattrs, ' '),
           'CONTENTS', caption,
         )
       ]
