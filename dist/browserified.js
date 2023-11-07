@@ -156,22 +156,24 @@ function createFormMarkups (lib, o, m, mylib) {
     };
   }
 
-  mylib.offCanvasButton = function offCanvasButton (obj) {
-    var id = "ID"+lib.uid(), labelid="ID"+lib.uid(), buttonmarkup, panemarkup;
+  function idize (obj) {
+    var id, labelid;
     obj = obj || {};
-    obj.offcanvas = obj.offcanvas || {};
-    obj.offcanvas.orientation = obj.offcanvas.orientation || 'start';
-    buttonmarkup = o(m.button,
-      'CLASS', appendStringTo('btn btn-primary', obj.buttonclass, ' '),
-      'ATTRS', appendStringTo(
-        'type="button" data-bs-toggle="offcanvas" data-bs-target="#'+id+'" aria-controls="'+id+'"',
-        obj.buttonattrs,
-        ' '),
-      'CONTENTS', obj.buttontext
-    );
-    panemarkup = o(m.div,
+    if (obj.id && obj.labelid) {
+      return obj;
+    }
+    id = "ID"+lib.uid();
+    labelid = "ID"+lib.uid();
+    obj.id = id;
+    obj.labelid = labelid;
+    return obj;
+  }
+
+  mylib.offCanvasPane = function offCanvasPane (obj) {
+    obj = idize(obj);
+    return o(m.div,
       'CLASS', appendStringTo('offcanvas '+'offcanvas-'+obj.offcanvas.orientation, obj.offcanvas.class, ' '),
-      'ATTRS', appendStringTo('id="'+id+'" aria-labelledby="'+labelid+'"', obj.offcanvas.attrs, ' '),
+      'ATTRS', appendStringTo('id="'+obj.id+'" aria-labelledby="'+obj.labelid+'"', obj.offcanvas.attrs, ' '),
       'CONTENTS', [
         o(m.div,
           'CLASS', 'offcanvas-header',
@@ -179,7 +181,7 @@ function createFormMarkups (lib, o, m, mylib) {
           'CONTENTS', [
             o(m.h5,
               'CLASS', 'offcanvas-title',
-              'ATTRS', 'id="'+labelid+'"',
+              'ATTRS', 'id="'+obj.labelid+'"',
               'CONTENTS', obj.offcanvas.title || 'Title'
             ),
             o(m.button,
@@ -194,6 +196,22 @@ function createFormMarkups (lib, o, m, mylib) {
         )        
       ] 
     );
+  };
+
+  mylib.offCanvasButton = function offCanvasButton (obj) {
+    var buttonmarkup, panemarkup;
+    obj = idize(obj);
+    obj.offcanvas = obj.offcanvas || {};
+    obj.offcanvas.orientation = obj.offcanvas.orientation || 'start';
+    buttonmarkup = o(m.button,
+      'CLASS', appendStringTo('btn btn-primary', obj.buttonclass, ' '),
+      'ATTRS', appendStringTo(
+        'type="button" data-bs-toggle="offcanvas" data-bs-target="#'+obj.id+'" aria-controls="'+obj.id+'"',
+        obj.buttonattrs,
+        ' '),
+      'CONTENTS', obj.buttontext
+    );
+    panemarkup = mylib.offCanvasPane(obj);
     if (!obj.split) {
       return o(m.div,
         'CLASS', appendStringTo('', obj.class, ' '),
