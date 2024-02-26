@@ -260,7 +260,7 @@ function createFormMarkups (lib, o, m, mylib) {
       , 'CONTENTS', [
         o(m.span
           , 'CLASS', 'groupboxcaption .text-nowrap'
-          , 'ATTRS', 'style="white-space:nowrap;"'
+          , 'ATTRS', 'style="white-space:nowrap; width: fit-content;"'
           , 'CONTENTS', options.caption
         ),
         o(m.div
